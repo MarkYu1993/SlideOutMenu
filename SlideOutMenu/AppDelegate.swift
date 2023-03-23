@@ -10,10 +10,8 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        setupAppearance()
         return true
     }
 
@@ -31,6 +29,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    private func setupAppearance() {
+        if #available(iOS 13.0, *) {
+            let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            tabBarAppearance.backgroundColor = .white
+            let navigationBarAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navigationBarAppearance.backgroundColor = .systemGray5
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            if #available(iOS 15.0, *) {
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            }
+        }
+    }
 
 }
 
